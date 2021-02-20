@@ -34,3 +34,16 @@ $ docker-compose exec app rm -rf blog
 ```
 
 「http://localhost」でWelcome画面が表示されれば成功です。
+
+
+```
+docker-compose exec app bash
+composer create-project --prefer-dist laravel/laravel site
+cd site/
+composer require laravel/jetstream
+php artisan jetstream:install inertia
+npm install
+npm run dev
+chmod -R 777 bootstrap/cache
+chmod -R 777 storage
+```

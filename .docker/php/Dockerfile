@@ -5,11 +5,14 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 
 # install Lib
 RUN apk update && \
-    apk add --no-cache --virtual .php-builds oniguruma-dev postgresql-dev git zip unzip
+    apk add --no-cache --virtual .php-builds oniguruma-dev postgresql-dev git zip unzip gd
 
 # add php,apache-module
 RUN docker-php-ext-install mbstring pdo pdo_pgsql && \
     docker-php-ext-enable mbstring
+
+# install node.js
+RUN apk add --update nodejs npm bash
 
 # php.conf php-fpm.conf
 COPY conf/php.ini /usr/local/etc/php/php.ini

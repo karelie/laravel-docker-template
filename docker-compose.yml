@@ -1,12 +1,13 @@
 version: '3'
 services:
+
   nginx:
-    container_name: nginx
+    container_name: nginx1
     build: .docker/nginx
     ports:
       - 80:80
     volumes:
-      - .:/app
+      - ./site:/app
     tty: true
     restart: always
     depends_on:
@@ -28,7 +29,7 @@ services:
       DB_USERNAME: 'docker'
       DB_PASSWORD: 'docker'
     volumes:
-      - .:/app
+      - ./site:/app
     expose:
       - 9000
     tty: true
@@ -49,5 +50,16 @@ services:
     ports:
       - 5432:5432
 
+  redis:
+    build:
+      context: .docker/redis
+      dockerfile: Dockerfile
+    volumes:
+      - redis:/data
+    ports:
+      - 63791:6379
+
 volumes:
   db:
+  redis:
+    driver: local
