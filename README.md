@@ -46,4 +46,10 @@ npm install
 npm run dev
 chmod -R 777 bootstrap/cache
 chmod -R 777 storage
+
+npm run watch
+
+npm run dev
+
+npm run prod
 ```
