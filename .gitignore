@@ -1,2 +1,5 @@
 .idea
-
+site/public/js/app.js
+site/public/css/app.css
+site/public/mix-manifest.json
+site/public/js/app.js.LICENSE.txt
