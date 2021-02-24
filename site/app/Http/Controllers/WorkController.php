@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 
 use App\Models\Work;
 use App\Models\User;
@@ -26,6 +27,13 @@ class WorkController extends Controller
     //     $this->meta = $meta;
     // }
 
+=======
+use App\Models\work;
+use Illuminate\Http\Request;
+
+class WorkController extends Controller
+{
+>>>>>>> afe9d47c2fe91d6a745d190b7d7229ef32ff4741
     /**
      * Display a listing of the resource.
      *
@@ -33,6 +41,7 @@ class WorkController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
 
         Meta::setTitle('Work/Index');
         Meta::setDescription('Awesome page');
@@ -40,6 +49,9 @@ class WorkController extends Controller
             'content' => 'butschster',
         ]);
         return Inertia::render('Work/Index');
+=======
+        //
+>>>>>>> afe9d47c2fe91d6a745d190b7d7229ef32ff4741
     }
 
     /**
@@ -71,6 +83,7 @@ class WorkController extends Controller
      */
     public function show(work $work)
     {
+<<<<<<< HEAD
 
 
         $work = Work::find($work->id);
@@ -83,6 +96,9 @@ class WorkController extends Controller
 
 
         return Inertia::render('Work/Show',$work);
+=======
+        //
+>>>>>>> afe9d47c2fe91d6a745d190b7d7229ef32ff4741
     }
 
     /**
@@ -118,6 +134,7 @@ class WorkController extends Controller
     {
         //
     }
+<<<<<<< HEAD
 
     public function api()
     {
@@ -131,4 +148,6 @@ class WorkController extends Controller
     
     }
 
+=======
+>>>>>>> afe9d47c2fe91d6a745d190b7d7229ef32ff4741
 }
