@@ -21,6 +21,7 @@ use App\Http\Controllers\UserController;
 
 Route::resource('/', HomeController::class);
 Route::get('api/works', [WorkController::class, 'api']);
+Route::get('api/user/{user:id}', [UserController::class, 'api']);
 
 Route::resource('/work', WorkController::class);
 Route::resource('/user', UserController::class);

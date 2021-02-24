@@ -7,6 +7,7 @@ use App\Models\Work;
 use App\Models\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache; 
 
 use Inertia\Inertia;
 
@@ -54,10 +55,8 @@ class UserController extends Controller
      */
     public function show(user $user)
     {
-        
-        $user = User::with('works')->get()->find($user->id);
+        $user = User::with('works:id,title,slug,status,cover','works.users:id,username,profile_photo_path')->select('id','username','profile_photo_path')->get()->find($user->id);
         Meta::setTitle($user['username']);
-
 
         return Inertia::render('User/Show',$user);
     }
@@ -94,5 +93,15 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function api(User $user)
+    {
+
+    $id = $user->id;
+    return Cache::remember('user.id-' . $id, 60 * 60 * 24, function () use ($id) { 
+        return User::with('works:id,title,slug,status,cover','works.users:id,username,profile_photo_path')->select('id','username','profile_photo_path')->get()->find($id);
+    }); 
     }
 }
