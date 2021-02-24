@@ -52,4 +52,13 @@ npm run watch
 npm run dev
 
 npm run prod
+
+npm install -D vue-meta
+composer require butschster/meta-tags
+composer require laravel/helpers
+
+npm install vue-infinite-loading -S
+
+composer require predis/predis
+
 ```

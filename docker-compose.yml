@@ -51,13 +51,14 @@ services:
       - 5432:5432
 
   redis:
+    container_name: app_redis
     build:
       context: .docker/redis
       dockerfile: Dockerfile
     volumes:
       - redis:/data
     ports:
-      - 63791:6379
+      - 6379:6379
 
 volumes:
   db:

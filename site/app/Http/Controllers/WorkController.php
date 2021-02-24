@@ -2,11 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\work;
+
+use App\Models\Work;
+use App\Models\User;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache; 
+
+use Inertia\Inertia;
+
+// use Butschster\Head\MetaTags\MetaInterface;
+use Butschster\Head\Facades\Meta;
+
+
 
 class WorkController extends Controller
 {
+
+    // protected $meta;
+
+    // public function __contruct(MetaInterface $meta)
+    // {
+    //     $this->meta = $meta;
+    // }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +33,13 @@ class WorkController extends Controller
      */
     public function index()
     {
-        //
+
+        Meta::setTitle('Work/Index');
+        Meta::setDescription('Awesome page');
+        Meta::addMeta('twitter:card', [
+            'content' => 'butschster',
+        ]);
+        return Inertia::render('Work/Index');
     }
 
     /**
@@ -46,7 +71,18 @@ class WorkController extends Controller
      */
     public function show(work $work)
     {
-        //
+
+
+        $work = Work::find($work->id);
+        // dd( $work);
+        $users = $work->users;
+        // dd( $users);
+
+        $work = Work::with('users')->get()->find($work->id);
+        Meta::setTitle($work['title']);
+
+
+        return Inertia::render('Work/Show',$work);
     }
 
     /**
@@ -82,4 +118,17 @@ class WorkController extends Controller
     {
         //
     }
+
+    public function api()
+    {
+
+    //    $currentPage = request()->get('page',1);
+        // return Work::with('users')->paginate(21); 
+       $currentPage = request()->get('page',1);
+        return Cache::remember('works.all-' . $currentPage, 60 * 60 * 24, function () { 
+            return Work::with('users:id,username,profile_photo_path')->select('id','title','slug','cover')->paginate(21); 
+        }); 
+    
+    }
+
 }

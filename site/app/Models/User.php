@@ -25,6 +25,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
+        'userslug',
         'email',
         'password',
     ];
@@ -58,4 +60,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function works()
+    {
+        return $this->belongsToMany(Work::class)->withTimestamps();
+    }
 }

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\work;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class WorkFactory extends Factory
 {
@@ -22,7 +23,12 @@ class WorkFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this -> faker ->sentence($nbWords = 4, $variableNbWords = true),
+            'slug' => str_slug($this -> faker ->sentence($nbWords = 4, $variableNbWords = true), '-'),
+            'status' => 'published',
+            'cover' => 'image-' . $this -> faker ->numberBetween(1, 17) . '.jpg',
+            'description' => $this -> faker ->realText(),
+            'content' => json_encode(["key" => "value"]),        
         ];
     }
 }
