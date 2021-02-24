@@ -78,6 +78,7 @@
         </article>
       </li>
     </ul>
+
     <div v-if="isLoading" class="loading-spinner">Loading moar users</div>
     <div v-if="hasFetchedAllData" class="loading-spinner">No More Data</div>
   </div>
@@ -147,7 +148,7 @@ export default {
     title: {
       immediate: true,
       handler(title) {
-        document.title = "Top Index";
+        document.title = "美術部";
       },
     },
   },

@@ -79,7 +79,16 @@ class WorkController extends Controller
         // dd( $users);
 
         $work = Work::with('users')->get()->find($work->id);
-        Meta::setTitle($work['title']);
+
+        Meta::setTitleSeparator(' | ')
+            ->setTitle(config('app.name'))
+            ->prependTitle($work['title']);
+        Meta::setDescription($work['description']);
+        Meta::addMeta('og:site_name', ['content' => config('app.name')]);
+        Meta::addMeta('og:title', ['content' => $work['title']]);
+        Meta::addMeta('og:description', ['content' => $work['description']]);
+        Meta::addMeta('og:type', ['content' => 'article']);
+        Meta::addMeta('og:image', ['content' => $work['profile_photo_path']]);
 
 
         return Inertia::render('Work/Show',$work);

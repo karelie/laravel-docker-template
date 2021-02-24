@@ -17784,7 +17784,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     title: {
       immediate: true,
       handler: function handler(title) {
-        document.title = "Top Index";
+        document.title = "美術部";
       }
     }
   }
