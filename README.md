@@ -61,4 +61,11 @@ npm install vue-infinite-loading -S
 
 composer require predis/predis
 
+composer require overtrue/laravel-like -vvv
+php artisan vendor:publish --provider="Overtrue\\LaravelLike\\LikeServiceProvider" --tag=config
+php artisan vendor:publish --provider="Overtrue\\LaravelLike\\LikeServiceProvider" --tag=migrations
+
+composer require overtrue/laravel-follow -vvv
+php artisan vendor:publish --provider="Overtrue\\LaravelFollow\\FollowServiceProvider" --tag=migrations
+
 ```
