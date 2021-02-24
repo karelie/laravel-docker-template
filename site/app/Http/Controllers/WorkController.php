@@ -83,7 +83,6 @@ class WorkController extends Controller
      */
     public function show(work $work)
     {
-<<<<<<< HEAD
 
 
         $work = Work::find($work->id);
@@ -96,9 +95,6 @@ class WorkController extends Controller
 
 
         return Inertia::render('Work/Show',$work);
-=======
-        //
->>>>>>> afe9d47c2fe91d6a745d190b7d7229ef32ff4741
     }
 
     /**
@@ -134,7 +130,6 @@ class WorkController extends Controller
     {
         //
     }
-<<<<<<< HEAD
 
     public function api()
     {
@@ -148,6 +143,4 @@ class WorkController extends Controller
     
     }
 
-=======
->>>>>>> afe9d47c2fe91d6a745d190b7d7229ef32ff4741
 }
