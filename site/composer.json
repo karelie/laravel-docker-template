@@ -19,6 +19,7 @@
         "laravel/jetstream": "^2.2",
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
+        "overtrue/laravel-follow": "^2.2",
         "overtrue/laravel-like": "^4.0",
         "predis/predis": "^1.1",
         "tightenco/ziggy": "^1.0"
