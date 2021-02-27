@@ -74,6 +74,9 @@
                 </li>
               </template>
             </p>
+            <span
+              ><LikesCount :model="'work'" :likesId="work.id"></LikesCount
+            ></span>
           </footer>
         </article>
       </li>
@@ -86,13 +89,20 @@
 
 <script>
 import { ref, onBeforeMount, onMounted, onBeforeUnmount, computed } from "vue";
+import LikesCountComponent from "../../Component/LikesCountComponent.vue";
 
 export default {
+  components: {
+    LikesCount: LikesCountComponent,
+  },
   props: {
     title: String,
     // works: Object,
   },
+
   setup() {
+    const likesId = ref(0);
+    const model = ref();
     const works = ref([]);
     const current_page = ref(0);
     const last_page = ref();
@@ -137,6 +147,8 @@ export default {
       window.removeEventListener("scroll", handleScroll);
     });
     return {
+      model,
+      likesId,
       works,
       isInitialRequestLoading,
       isLoading,

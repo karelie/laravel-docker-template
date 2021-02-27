@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WorkController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,12 @@ Route::resource('/', HomeController::class);
 Route::get('api/works', [WorkController::class, 'api']);
 Route::get('api/user/{user:id}', [UserController::class, 'api']);
 
-Route::resource('/work', WorkController::class);
-Route::resource('/user', UserController::class);
+Route::resource('work', WorkController::class);
+Route::resource('user', UserController::class);
+
+Route::get('like/likers/{model}/{id}', [LikeController::class, 'likesCount']);
+Route::get('like/liked/{model}/{likedmodel}/{id}', [LikeController::class, 'liked']);
+Route::get('like/toggle/{model}/{id}', [LikeController::class, 'toggle']);
 
 
 // Route::get('/', function () {
