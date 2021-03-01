@@ -6,6 +6,7 @@ use App\Models\Work;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache; 
 
 class LikeController extends Controller
 {
@@ -24,8 +25,11 @@ class LikeController extends Controller
         // return $work->likers()->count();
 
         if($model == 'work'){
-            $work = Work::find($id);
-            return $work->likers()->count();
+            $work_id = $id;
+            return Cache::remember('work.like-' . $id, 60 * 60 * 24, function() use($id){ 
+                $work = Work::find($id);
+                return $work->likers()->count();
+            }); 
         }
     }
 

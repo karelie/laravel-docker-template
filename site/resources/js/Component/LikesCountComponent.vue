@@ -1,5 +1,7 @@
 <template>
-  <span>{{ likes }}</span>
+  <p class="ml-auto">
+    {{ likes }}
+  </p>
 </template>
 
 <script>
