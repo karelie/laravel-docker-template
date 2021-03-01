@@ -29,7 +29,7 @@ Route::resource('user', UserController::class);
 
 Route::get('like/likers/{model}/{id}', [LikeController::class, 'likesCount']);
 Route::get('like/liked/{model}/{likedmodel}/{id}', [LikeController::class, 'liked']);
-Route::get('like/toggle/{model}/{id}', [LikeController::class, 'toggle']);
+Route::get('like/toggle/{model}/{id}', [LikeController::class, 'toggle'])->name('likeToggle');
 
 
 // Route::get('/', function () {

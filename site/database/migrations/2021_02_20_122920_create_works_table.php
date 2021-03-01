@@ -20,6 +20,7 @@ class CreateWorksTable extends Migration
             $table->string('status')->nullable();
             $table->string('cover')->nullable();
             $table->string('description')->nullable();
+            $table->integer('likes')->nullable();
             $table->json('content')->nullable();
             $table->timestamps();
         });

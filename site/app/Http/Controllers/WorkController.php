@@ -135,12 +135,12 @@ class WorkController extends Controller
     //    $currentPage = request()->get('page',1);
         // return Work::with('users')->paginate(21); 
         
-       $currentPage = request()->get('page',1);
-        return Cache::remember('works.all-' . $currentPage, 60 * 60 * 24, function () { 
+    //    $currentPage = request()->get('page',1);
+    //     return Cache::remember('works.all-' . $currentPage, 60 * 60 * 24, function () { 
          return Work::with('users:id,username,profile_photo_path')
-            ->select('id','title','slug','status','cover')
+            ->select('id','title','slug','status','cover','likes')
             ->paginate(21);
-        }); 
+        // });  
 
     
     // return Work::with('users:id,username,profile_photo_path','likes')

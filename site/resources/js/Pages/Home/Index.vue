@@ -14,7 +14,7 @@
         class="flex flex-wrap content-start -mx-1 lg:-mx-4 infinite-container"
       >
         <li
-          v-for="work in works"
+          v-for="(work, index) in works"
           :key="work.id"
           class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3 xl:w-1/4"
         >
@@ -83,7 +83,19 @@
                   </li>
                 </template>
               </p>
-              <LikesCount :model="'work'" :likesId="work.id"></LikesCount>
+              <p class="ml-auto">
+                <span v-if="!$page.props.user">{{ work.likes }}</span>
+                <span
+                  class="workLikeCount"
+                  v-else
+                  v-on:click="doClick('work', work.id, index)"
+                  :model="'work'"
+                  :likesId="work.id"
+                >
+                  {{ work.likes }}{{ likes }}
+                </span>
+              </p>
+              <!-- <LikesCount :model="'work'" :likesId="work.id"></LikesCount> -->
             </footer>
           </article>
         </li>
@@ -99,6 +111,7 @@
 import { ref, onBeforeMount, onMounted, onBeforeUnmount, computed } from "vue";
 import AppLayout from "@/Layouts/AppLayout";
 import LikesCountComponent from "../../Component/LikesCountComponent.vue";
+import axios from "axios";
 
 export default {
   components: {
@@ -106,7 +119,26 @@ export default {
   },
   props: {
     title: String,
-    // works: Object,
+    model: String,
+    likesId: Number,
+    textareaVal: String,
+  },
+
+  data: () => {
+    return {
+      likes: "",
+      works: [{ likes: "" }],
+    };
+  },
+
+  methods: {
+    doClick: function (model, likesId, index) {
+      console.log(model + "/" + likesId);
+      axios
+        .get("/like/toggle/" + model + "/" + likesId)
+        .then((response) => (this.works[index].likes = response.data))
+        .catch((error) => console.log(error));
+    },
   },
 
   setup() {

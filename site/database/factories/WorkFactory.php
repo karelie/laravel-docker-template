@@ -28,6 +28,7 @@ class WorkFactory extends Factory
             'status' => 'published',
             'cover' => 'image-' . $this -> faker ->numberBetween(1, 17) . '.jpg',
             'description' => $this -> faker ->realText(),
+            'likes' => 0,
             'content' => json_encode(["key" => "value"]),        
         ];
     }
