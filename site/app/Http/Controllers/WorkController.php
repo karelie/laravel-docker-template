@@ -8,6 +8,7 @@ use App\Models\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache; 
+use Illuminate\Support\Facades\DB;
 
 use Inertia\Inertia;
 
@@ -133,11 +134,27 @@ class WorkController extends Controller
 
     //    $currentPage = request()->get('page',1);
         // return Work::with('users')->paginate(21); 
+        
        $currentPage = request()->get('page',1);
         return Cache::remember('works.all-' . $currentPage, 60 * 60 * 24, function () { 
-            return Work::with('users:id,username,profile_photo_path')->select('id','title','slug','status','cover')->paginate(21); 
+         return Work::with('users:id,username,profile_photo_path')
+            ->select('id','title','slug','status','cover')
+            ->paginate(21);
         }); 
+
     
+    // return Work::with('users:id,username,profile_photo_path','likes')
+    // ->select('id','title','slug','status','cover')
+    // ->paginate(21);
+
+    // $work = Work::find(1);
+    //     $user = User::find(1);
+    //     return    $user->like($work);
+    // return DB::table('works')
+    // ->leftJoin('user_work', 'works.id', '=', 'user_work.work_id')
+    // ->leftJoin('users', 'user_work.user_id', '=', 'users.id')
+    // ->select('works.*','users.id','users.id','users.username')
+    // ->paginate(21);
     }
 
 }
