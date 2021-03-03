@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache; 
+use Illuminate\Support\Facades\DB;
 
 class LikeController extends Controller
 {
@@ -48,9 +49,28 @@ class LikeController extends Controller
         if($model == 'work'){
             $user = Auth::user();
             $work = Work::find($id);
+            
             $user->toggleLike($work);
+            $likes = $work->likers()->count();
+            $work->likes = $likes;
+            $work->save();
+            $likers = DB::table('likes')
+            ->where('likeable_type', '=', 'App\Models\Work')
+            ->where('user_id', '=', $user->id)
+            ->select('likeable_id')
+            ->get();
+            
+            $likes_id = [];
+            foreach($likers as $liker){
+                array_push($likes_id, $liker->likeable_id);
+            }
+            $user->likes = json_encode($likes_id);
+            $user->save();
 
-            return $work->likers()->count();
+            // return $likes;
+            $haslike = $user->hasLiked($work);
+
+            return [$likes,  $haslike ];
         }
     }
 

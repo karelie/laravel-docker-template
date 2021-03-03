@@ -139,8 +139,9 @@ class WorkController extends Controller
     //     return Cache::remember('works.all-' . $currentPage, 60 * 60 * 24, function () { 
          return Work::with('users:id,username,profile_photo_path')
             ->select('id','title','slug','status','cover','likes')
+            ->orderby('id')
             ->paginate(21);
-        // });  
+        // });  ぃ
 
     
     // return Work::with('users:id,username,profile_photo_path','likes')

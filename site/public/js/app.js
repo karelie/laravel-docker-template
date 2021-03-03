@@ -17707,8 +17707,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      likes: "",
+      hasLike: "",
       works: [{
+        likes: ""
+      }, {
+        hasLike: ""
+      }],
+      user: [{
         likes: ""
       }]
     };
@@ -17719,7 +17724,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       console.log(model + "/" + likesId);
       axios__WEBPACK_IMPORTED_MODULE_4___default().get("/like/toggle/" + model + "/" + likesId).then(function (response) {
-        return _this.works[index].likes = response.data;
+        _this.works[index].likes = response.data[0];
+        _this.works[index].hasLike = response.data[1];
+        console.log(_this.works[index].hasLike);
+        console.log(likesId);
       })["catch"](function (error) {
         return console.log(error);
       });
@@ -21941,10 +21949,22 @@ var _hoisted_19 = {
   key: 0
 };
 var _hoisted_20 = {
+  key: 0
+};
+var _hoisted_21 = {
+  key: 1
+};
+var _hoisted_22 = {
+  key: 2
+};
+var _hoisted_23 = {
+  key: 3
+};
+var _hoisted_24 = {
   key: 1,
   "class": "loading-spinner"
 };
-var _hoisted_21 = {
+var _hoisted_25 = {
   key: 2,
   "class": "loading-spinner"
 };
@@ -22025,22 +22045,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           , ["href"])]);
         }), 128
         /* KEYED_FRAGMENT */
-        ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_18, [!_ctx.$page.props.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(work.likes), 1
+        ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_18, [!_ctx.$page.props.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(work.likes), 1
         /* TEXT */
-        )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", {
+        )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
           key: 1,
-          "class": "workLikeCount",
+          "class": "cursor-pointer",
           onClick: function onClick($event) {
             return $options.doClick('work', work.id, index);
           },
           model: 'work',
           likesId: work.id
-        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(work.likes) + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.likes), 9
-        /* TEXT, PROPS */
+        }, [work.hasLike === true ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_20, "hasLike")) : work.hasLike === false ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_21, "Nolike")) : _ctx.$page.props.user.likes.indexOf(work.id) === -1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_22, " Nolike ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_23, "hasLike")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(work.likes), 1
+        /* TEXT */
+        )], 8
+        /* PROPS */
         , ["onClick", "likesId"]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <LikesCount :model=\"'work'\" :likesId=\"work.id\"></LikesCount> ")])])]);
       }), 128
       /* KEYED_FRAGMENT */
-      ))]), $setup.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_20, "Loading moar users")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.hasFetchedAllData ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_21, "No More Data")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
+      ))]), $setup.isLoading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_24, "Loading moar users")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.hasFetchedAllData ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_25, "No More Data")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
     }),
     _: 1
     /* STABLE */

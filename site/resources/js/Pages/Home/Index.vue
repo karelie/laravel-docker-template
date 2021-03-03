@@ -83,18 +83,26 @@
                   </li>
                 </template>
               </p>
-              <p class="ml-auto">
-                <span v-if="!$page.props.user">{{ work.likes }}</span>
-                <span
-                  class="workLikeCount"
+              <div class="ml-auto">
+                <div v-if="!$page.props.user">{{ work.likes }}</div>
+                <div
+                  class="cursor-pointer"
                   v-else
                   v-on:click="doClick('work', work.id, index)"
                   :model="'work'"
                   :likesId="work.id"
                 >
-                  {{ work.likes }}{{ likes }}
-                </span>
-              </p>
+                  <div v-if="work.hasLike === true">hasLike</div>
+                  <div v-else-if="work.hasLike === false">Nolike</div>
+                  <div
+                    v-else-if="$page.props.user.likes.indexOf(work.id) === -1"
+                  >
+                    Nolike
+                  </div>
+                  <div v-else>hasLike</div>
+                  {{ work.likes }}
+                </div>
+              </div>
               <!-- <LikesCount :model="'work'" :likesId="work.id"></LikesCount> -->
             </footer>
           </article>
@@ -126,8 +134,9 @@ export default {
 
   data: () => {
     return {
-      likes: "",
-      works: [{ likes: "" }],
+      hasLike: "",
+      works: [{ likes: "" }, { hasLike: "" }],
+      user: [{ likes: "" }],
     };
   },
 
@@ -136,7 +145,12 @@ export default {
       console.log(model + "/" + likesId);
       axios
         .get("/like/toggle/" + model + "/" + likesId)
-        .then((response) => (this.works[index].likes = response.data))
+        .then((response) => {
+          this.works[index].likes = response.data[0];
+          this.works[index].hasLike = response.data[1];
+          console.log(this.works[index].hasLike);
+          console.log(likesId);
+        })
         .catch((error) => console.log(error));
     },
   },
